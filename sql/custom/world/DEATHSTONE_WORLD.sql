@@ -1,0 +1,1 @@
+INSERT INTO `playercreateinfo_item` (`race`, `class`, `itemid`, `amount`) VALUES ( 0, 0 , 90000, 1);
