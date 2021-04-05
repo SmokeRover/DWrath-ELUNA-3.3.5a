@@ -37,7 +37,7 @@ class lfg_micro : public PlayerScript
 public:
     lfg_micro() : PlayerScript("lfg_micro") { }
 
-   void OnLogin(Player* /*player*/, bool /*firstLogin*/) override
+   void OnLogin(Player* player, bool /*firstLogin*/) override
    {
       if (sConfigMgr->GetIntDefault("MicroLFG.Enable", true))
         {
