@@ -678,6 +678,9 @@ bool Player::Create(ObjectGuid::LowType guidlow, CharacterCreateInfo* createInfo
     // all item positions resolved
 
     GetThreatManager().Initialize();
+    //DWrath edit
+    UpdateStatPoints(); //Fractional
+
 
     return true;
 }
@@ -3603,6 +3606,63 @@ void Player::LearnSpell(uint32 spell_id, bool dependent, uint32 fromSkill /*= 0*
     }
 }
 
+//DWrath edit
+
+std::vector<int> Player::FetchStatPoints() //Fractional
+{
+    std::vector<int> points;
+    uint32 guid = GetGUID().GetCounter();
+
+    QueryResult result = CharacterDatabase.PQuery("SELECT strength, agility, stamina, intellect, spirit FROM custom_stats WHERE guid=%u", guid);
+    if (!result)
+    {
+        points.push_back(0);
+        points.push_back(0);
+        points.push_back(0);
+        points.push_back(0);
+        points.push_back(0);
+        return points;
+    }
+
+    Field* fields = result->Fetch();
+    points.push_back(fields[0].GetUInt32());
+    points.push_back(fields[1].GetUInt32());
+    points.push_back(fields[2].GetUInt32());
+    points.push_back(fields[3].GetUInt32());
+    points.push_back(fields[4].GetUInt32());
+    return points;
+}
+
+void Player::UpdateStatPoints() //Fractional
+{
+    m_customStatPoints = FetchStatPoints();
+}
+
+std::vector<int> Player::GetStatPoints() //Fractional
+{
+    return m_customStatPoints;
+}
+
+void Player::ModifyStatPoints(std::vector<int> mod) //Fractional
+{
+    m_customStatPoints[0] += mod[0];
+    m_customStatPoints[1] += mod[1];
+    m_customStatPoints[2] += mod[2];
+    m_customStatPoints[3] += mod[3];
+    m_customStatPoints[4] += mod[4];
+}
+
+void Player::SaveStatPoints() //Fractional
+{
+    uint32 guid = GetGUID().GetCounter();
+    std::vector<int> points = GetStatPoints();
+
+    CharacterDatabase.PExecute("DELETE FROM custom_stats WHERE guid=%u", guid);
+    CharacterDatabase.PExecute("INSERT INTO custom_stats VALUES (%u, %u, %u, %u, %u, %u)", guid, points[0], points[1], points[2], points[3], points[4]);
+}
+
+
+
 void Player::RemoveSpell(uint32 spell_id, bool disabled, bool learn_low_rank)
 {
     PlayerSpellMap::iterator itr = m_spells.find(spell_id);
@@ -4274,6 +4334,10 @@ void Player::DeleteFromDB(ObjectGuid playerguid, uint32 accountId, bool updateRe
 
             // DWrath EDIT, deletes player row from custom_dwrath_character_stats
             stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_ACCOUNT_DWRATH);
+            stmt->setUInt32(0, guid);
+            trans->Append(stmt);
+
+            stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_CUSTOM_STATS_DWRATH);
             stmt->setUInt32(0, guid);
             trans->Append(stmt);
 

@@ -1421,6 +1421,13 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         void SendUnlearnSpells();
         bool AddSpell(uint32 spellId, bool active, bool learning, bool dependent, bool disabled, bool loading = false, uint32 fromSkill = 0);
         void LearnSpell(uint32 spell_id, bool dependent, uint32 fromSkill = 0);
+        //DWrath edit
+        std::vector<int> FetchStatPoints(); //Fractional
+        void UpdateStatPoints(); //Fractional
+        std::vector<int> GetStatPoints(); //Fractional
+        void ModifyStatPoints(std::vector<int> mod); //Fractional'
+        void SaveStatPoints(); //Fractional
+
         void RemoveSpell(uint32 spell_id, bool disabled = false, bool learn_low_rank = true);
         void ResetSpells(bool myClassOnly = false);
         void LearnCustomSpells();
@@ -2502,6 +2509,8 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
 
         // DWrath EDIT, defines variable
         uint32 m_BoostedXPRate;
+        std::vector<int> m_customStatPoints; //Fractional
+
 
         // variables to save health and mana before duel and restore them after duel
         uint32 healthBeforeDuel;

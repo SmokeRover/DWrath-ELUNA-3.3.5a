@@ -450,6 +450,11 @@ ElunaRegister<Player> PlayerMethods[] =
     { "GetGuild", &LuaPlayer::GetGuild },
     { "GetAccountId", &LuaPlayer::GetAccountId },
     { "GetAccountName", &LuaPlayer::GetAccountName },
+    //DWrath edit
+    { "UpdateStatPoints", &LuaPlayer::UpdateStatPoints }, //Fractional
+    { "GetStatPoints", &LuaPlayer::GetStatPoints }, //Fractional
+    { "ModifyStatPoints", &LuaPlayer::ModifyStatPoints }, //Fractional
+    { "SaveStatPoints", &LuaPlayer::SaveStatPoints }, //Fractional
 #if defined (TBC) || defined (WOTLK)
     { "GetArenaPoints", &LuaPlayer::GetArenaPoints },
     { "GetHonorPoints", &LuaPlayer::GetHonorPoints },

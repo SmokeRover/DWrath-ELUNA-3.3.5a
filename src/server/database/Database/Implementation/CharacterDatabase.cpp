@@ -597,6 +597,7 @@ void CharacterDatabaseConnection::DoPrepareStatements()
 
     // DWrath EDIT, delete row from custom_dwrath_stats
     PrepareStatement(CHAR_DEL_ACCOUNT_DWRATH, "DELETE FROM custom_dwrath_character_stats WHERE GUID = ?", CONNECTION_ASYNC);
+    PrepareStatement(CHAR_DEL_CUSTOM_STATS_DWRATH, "DELETE FROM custom_stats WHERE guid = ?", CONNECTION_ASYNC);
 }
 
 CharacterDatabaseConnection::CharacterDatabaseConnection(MySQLConnectionInfo& connInfo) : MySQLConnection(connInfo)

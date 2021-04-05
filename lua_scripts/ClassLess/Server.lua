@@ -108,6 +108,22 @@ local function OnLogin(event, player)
     resets[guid] = reset
 end
 
+local function OnLearn(event, player)
+    local guid = player:GetGUIDLow()
+    local querry = CharDBQuery("SELECT * FROM character_classless WHERE guid = " .. guid)
+    if querry == nil then
+        DBCreate(guid)
+    else
+        sp, tsp, tal, sta, reset = DBRead(querry)
+    end
+    spells[guid] = toTable(sp)
+    tpells[guid] = toTable(tsp)
+    talents[guid] = toTable(tal)
+    stats[guid] = toTable(sta)
+    resets[guid] = reset
+    SendVars(AIO.Msg(), player, false)
+end
+
 local function OnLogout(event, player)
     local guid = player:GetGUIDLow()
     DBWrite(guid, "spells", toString(spells[guid]))
@@ -125,7 +141,7 @@ end
 RegisterPlayerEvent(2, OnDelete)
 RegisterPlayerEvent(3, OnLogin)
 RegisterPlayerEvent(4, OnLogout)
-
+RegisterPlayerEvent(13, OnLearn)
 
 local plrs = GetPlayersInWorld()
 if plrs then
@@ -145,23 +161,23 @@ function MyHandlers.LearnSpell(player, spr, tpr, clientSecret)
         end
     end
 	for i = 1, #spells[guid] do
-  local spell = spells[guid][i]
-  if not tContains(spr, spell) then
-	if (spell == 1579) then -- If Tame Beast container spell unlearn what it taught
-		player:RemoveSpell(1515)
-		player:RemoveSpell(883)
-		player:CastSpell(player, 2641, true)
-		player:RemoveSpell(2641)
-	end
-    player:RemoveSpell(spell)
-  end
-end
-for i = 1, #tpells[guid] do
-  local spell = tpells[guid][i]
-  if not tContains(spr, spell) then
-    player:RemoveSpell(spell)
-  end
-end
+        local spell = spells[guid][i]
+        if not tContains(spr, spell) then
+	        if (spell == 1579) then -- If Tame Beast container spell unlearn what it taught
+		        player:RemoveSpell(1515)
+		        player:RemoveSpell(883)
+		        player:CastSpell(player, 2641, true)
+		        player:RemoveSpell(2641)
+	        end
+            player:RemoveSpell(spell)
+        end
+    end
+    for i = 1, #tpells[guid] do
+        local spell = tpells[guid][i]
+        if not tContains(spr, spell) then
+            player:RemoveSpell(spell)
+        end
+    end
     spells[guid] = spr
     tpells[guid] = tpr
     DBWrite(guid, "spells", toString(spr))

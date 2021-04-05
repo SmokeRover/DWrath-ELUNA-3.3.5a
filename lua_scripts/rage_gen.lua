@@ -9,7 +9,7 @@ The scipt just hooks onto a players OnCast and checks what spell it is, if its i
 local PLAYER_EVENT_ON_SPELL_CAST = 5
 
 -- Spells are {SPELLID, INSTANT_RAGE, RAGEGEN, RAGE_PER_SEC}
-spelltable = {
+local spelltable = {
     bloodrage = {29131, 200, true, 10},
     enrage = {5229, 200, true, 10},
     charger1 = {100, 90, false, 0},
@@ -18,12 +18,12 @@ spelltable = {
 }
 
 -- Table for auras that periodically generate rage could probably use spelltable somehow but IUNNO
-rageauras = {
+local rageauras = {
     bloodrage = 29131,
     enrage = 5229,
 }
 -- If spell is charge in SetRage, checks if player knows the Improved Charge talents
-chargetable = {
+local chargetable = {
     charger1 = 100,
     charger2 = 6178,
     charger3 = 11578,
@@ -64,11 +64,11 @@ function SetRage(player, rage, spell ,ragegen, rageps)
     player:ModifyPower(rage, 1)
 
     player = player
-    if (ragegen == true) then
+    --[[if (ragegen == true) then
         ragepers = rageps
         auraid = spell
         prage = player:RegisterEvent(BloodEnRage, 1000, 10, player, ragepers, auraid) -- Runs BloodEnRage once per second 10 times
-    end
+    end]]
 end 
 
 -- Checks if the player has the Improved Charge talents
@@ -89,7 +89,7 @@ end
 
 -- Checks the rageauras table to be sure that the player still has the aura, if they do continue
 --      if they dont, remove the event and bail
-function BloodEnRage(eventid, delay, repeats, object, rageps, spell)
+--[[function BloodEnRage(eventid, delay, repeats, object, rageps, spell)
     player = object
     for i,v in pairs(rageauras) do
         if (auraid == v and player:HasAura(v) == false) then
@@ -98,6 +98,6 @@ function BloodEnRage(eventid, delay, repeats, object, rageps, spell)
         end
     end
     player:ModifyPower(ragepers, 1)
-end
+end]]
 
-RegisterPlayerEvent(PLAYER_EVENT_ON_SPELL_CAST, OnCast)
+--RegisterPlayerEvent(PLAYER_EVENT_ON_SPELL_CAST, OnCast)

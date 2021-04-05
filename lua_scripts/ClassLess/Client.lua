@@ -358,7 +358,7 @@ local function DoShit()
     --Utility Functions
     function GetPoints(type)
         if type == "ap" then
-            local ap = math.floor(UnitLevel("player") * 0.45) - #db.spells
+            local ap = math.floor(UnitLevel("player") * 0.50) - #db.spells
             local tap = #spellsplus
             return ap - tap, tap
         end
@@ -421,15 +421,15 @@ local function DoShit()
                         end
                     end
 					for i=1, #spellsminus do
-  if tContains(db.spells, spellsminus[i]) then
-    tRemoveKey(db.spells, spellsminus[i])
-  end
-end
-for i=1, #tpellsminus do
-  if tContains(db.tpells, tpellsminus[i]) then
-    tRemoveKey(db.tpells, tpellsminus[i])
-  end
-end
+                        if tContains(db.spells, spellsminus[i]) then
+                            tRemoveKey(db.spells, spellsminus[i])
+                        end
+                    end
+                    for i=1, #tpellsminus do
+                        if tContains(db.tpells, tpellsminus[i]) then
+                            tRemoveKey(db.tpells, tpellsminus[i])
+                         end
+                    end
                     wipe(spellsplus)
                     wipe(spellsminus)
                     wipe(tpellsplus)
@@ -446,10 +446,10 @@ end
                         end
                     end
 					for i=1, #talentsminus do
-  if tContains(db.talents, talentsminus[i]) then
-    tRemoveKey(db.talents, talentsminus[i])
-  end
-end
+                        if tContains(db.talents, talentsminus[i]) then
+                            tRemoveKey(db.talents, talentsminus[i])
+                        end
+                    end
                     wipe(talentsplus)
                     wipe(talentsminus)
                     sort(db.talents)

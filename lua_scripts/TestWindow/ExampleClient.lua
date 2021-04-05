@@ -108,6 +108,7 @@ end
 -- Closes the window when escape is pressed
 tinsert(UISpecialFrames, frame:GetName())
 
+-- Button hooked to the friends frame
 local containClk = CreateFrame("Frame", containClk, FriendsFrame)
 	containClk:SetSize(55,55)
 	containClk:RegisterForDrag("LeftButton")
@@ -188,7 +189,6 @@ sentstring:SetSize(270,80) -- Sets word wrapping based on parent frame size
 sentstring:SetNonSpaceWrap(truncated)
 -- Gets called from the server, recieves the sendstring var and creates a textblock containing it
 function MyHandlers.SetString(player, sendstring)
-	--print (sendstring)
 	sentstring:SetFormattedText(sendstring)
 end
 
@@ -202,20 +202,6 @@ input:SetScript("OnEnterPressed", input.ClearFocus)
 input:SetScript("OnEscapePressed", input.ClearFocus)
 input.tooltipText = 'Say something dumb'
 
--- Creating a slider:
---[[local slider = CreateFrame("Slider", "SlideTest", frame, "OptionsSliderTemplate")
-slider:SetSize(100, 17)
-slider:SetPoint("CENTER", frame, "CENTER", -70, -70)
-slider:SetValueStep(0.5)
-slider:SetMinMaxValues(0, 100)
-slider:SetValue(50)
-slider.tooltipText = 'Sick slider bro.'
-_G[slider:GetName() .."Text"]:SetText(50)
-slider:SetScript("OnValueChanged", function(self) _G[slider:GetName() .."Text"]:SetText(self:GetValue()) end)
-_G[slider:GetName().."High"]:Hide()
-_G[slider:GetName().."Low"]:Hide()
-slider:Show()
-]]--
 -- Creating a child, a button:
 local button = CreateFrame("Button", "ClickedBtn", frame, "UIPanelButtonTemplate")
 button:SetSize(120, 30)
@@ -223,12 +209,7 @@ button:SetPoint("CENTER", frame, "CENTER", 70, 40)
 button:EnableMouse(true)
 -- Small script to clear the focus from input on click
 button:SetScript("OnMouseUp", function() input:ClearFocus() end)
--- Usually I use UIPanelButtonTemplate for buttons, but I wanted to show and test some custom color texture here:
---local texture = button:CreateTexture("TextureTest")
---texture:SetAllPoints(button)
---texture:SetTexture(0.5, 1, 1, 0.5)
---button:SetNormalTexture(texture)
--- Set the font, could use GameFontNormal template, but I wanted to create my own
+
 local fontstring = button:CreateFontString("FontTest")
 fontstring:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE, MONOCHROME")
 fontstring:SetShadowOffset(1, -1)
@@ -240,7 +221,7 @@ button:SetText("Send Status")
 -- Here I send a message to the server that executes the print handler
 -- See the ExampleServer.lua file for the server side print handler.
 local function OnClickButton(btn)
-    AIO.Handle("AIOExample", "Print", btn:GetName(), input:GetText())
+    --AIO.Handle("AIOExample", "Print", btn:GetName(), input:GetText())
 	AIO.Handle("AIOExample", "AddToDB", btn:GetName(), input:GetText())
 	AIO.Handle("AIOExample", "Update")
 end

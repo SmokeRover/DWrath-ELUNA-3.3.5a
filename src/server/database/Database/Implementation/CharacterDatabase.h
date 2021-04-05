@@ -512,6 +512,7 @@ enum CharacterDatabaseStatements : uint32
 
     // DWrath EDIT, define from CharacterDatabase.cpp
     CHAR_DEL_ACCOUNT_DWRATH,
+    CHAR_DEL_CUSTOM_STATS_DWRATH,
 
     MAX_CHARACTERDATABASE_STATEMENTS
 };

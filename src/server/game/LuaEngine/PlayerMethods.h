@@ -4167,5 +4167,41 @@ namespace LuaPlayer
     player->RemovePet(player->GetPet(), (PetSaveMode)mode, returnreagent);
     return 0;
     }*/
+
+    //DWrath edit
+    int GetStatPoints(lua_State* L, Player* player) //Fractional
+    {
+        std::vector<int> stats = player->GetStatPoints();
+        Eluna::Push(L, stats[0]);
+        Eluna::Push(L, stats[1]);
+        Eluna::Push(L, stats[2]);
+        Eluna::Push(L, stats[3]);
+        Eluna::Push(L, stats[4]);
+        return 5;
+    }
+
+    int UpdateStatPoints(lua_State* L, Player* player) //Fractional
+    {
+        player->UpdateStatPoints();
+        return 0;
+    }
+
+    int ModifyStatPoints(lua_State* L, Player* player) //Fractional
+    {
+        std::vector<int> modifier;
+        modifier.push_back(Eluna::CHECKVAL<int>(L, 2, 0));
+        modifier.push_back(Eluna::CHECKVAL<int>(L, 3, 0));
+        modifier.push_back(Eluna::CHECKVAL<int>(L, 4, 0));
+        modifier.push_back(Eluna::CHECKVAL<int>(L, 5, 0));
+        modifier.push_back(Eluna::CHECKVAL<int>(L, 6, 0));
+        player->ModifyStatPoints(modifier);
+        return 0;
+    }
+
+    int SaveStatPoints(lua_State* L, Player* player) //Fractional
+    {
+        player->SaveStatPoints();
+        return 0;
+    }
 };
 #endif
