@@ -1,8 +1,42 @@
-# ![logo](https://ml.dolphinjammer.com:4433/logo.6023b87e.png) TrinityCore DWrath (3.3.5)
+# TrinityCore DWrath (3.3.5)  <img src="https://github.com/SmokeRover/DWrath-ELUNA-3.3.5a/blob/primary/logo.6023b87e.png" width="100" height="90"/>
+
 
 ## DWrath
 
 This is a modified version of Trinitycore + Eluna, its using code and modules from AstoriaCore and AzerothCore with the intent of creating a classless experience that imitates how the Ascension Project works.
+
+### Currently available:
+* Spell learning GUI from AstoriaCore, lightly modified to work with other changes.
+* RandomSpell lua script, triggers a spell to be randomly selected from a table every second level and creates a visual on the client side.
+* Talent point system from AstoriaCore with core changes to accommodate the system.
+* Trainers cannot teach base/unranked spells to avoid disruptions to the Classless system from AstoriaCore.
+* A custom trainer called King Krabe which can be summoned using .npc add 69209. Can also be made a companion spell by importing the db_spell_12340 to your spell.dbc. And learning spell 90001.
+* Players start with generic gear.
+* Random enchants from a module made for AzerothCore.
+* MicroLFG-- Its just SoloLFG.
+* InstanceBalance, a modified version of [this](https://github.com/TrinityCore/TrinityCoreCustomChanges/tree/3.3.5-solocraft) solocraft script.
+* "Fixed" rage generation, Its just commented lines in the core so I am expecting other functionality to be busted from it. Works so far though.
+* Fixed tamepet/summon_pet system. Tamepet originally had code that locked out non-hunter classes. summon_pet relied on that logic. Requires client changes to stop lua errors.
+* Deathstone, after a player releases spirit, their x-y-z-mapid is stored in a custom table, using the deathstone will teleport them to those co-ords. Currently abusable as the stored values are only reset after using the stone. SPELL ID 90000, is a custom item added to the item.dbc.
+* GroupLevel script, finds player levels in the group and creates an experience boost based on the level difference. Default difference is 7 levels. Can be changed in the C++ script
+  * If a player is level 8 and another is level 1 in a group, an experience boost is applied to the level 1 player by using garbage math to apply difference to XP gains.
+  * The group state is checked every tick to avoid players retaining the boost after leaving a group or going offline. Also avoids crashing the server.
+  * I should change the code to floats from ints so the boost is more specific/accurate.
+  * Players can opt in using .grplvl
+
+### Planned:
+* Additional custom enchants. Ascension-like.
+* Similar enchantment rolling system. Ascension-like.
+* Dungeon weapon/armor drops in world. Ascension-like.
+* Custom currencies used for spell/talent learning/rolling. To replace the existing system from the AstoriaCore classless GUI.
+* Support for Death Knight spells maybe.
+
+### Unfinished/Busted:
+* Currently the core and DB has the naga race enabled which may cause issues with unmodified clients. Am planning to clean up at a later date.
+* RandomSpell currently has no filters aside from level requirements, so a player could learn maul (bearform skill) without having the form spell learnt, essentially gaining an unusable spell.
+* MOST class specific quests/vendors are still locked to those classes.
+* ALL class locked items are still locked to those classes.
+
 
 ## Introduction
 
