@@ -982,7 +982,7 @@ local function DoShit()
                     ap .. " Ability Points\n" .. tp .. " Talent Points"
                 button.tooltip:AddLine(string, c.r, c.g, c.b, true)
             end
-            button.tooltip:AddLine("Drag with right button for move", 1, 1, 1, true)
+            button.tooltip:AddLine("Hold right mouse to drag this icon.", 1, 1, 1, true)
             button.tooltip:Show()
         end
     )

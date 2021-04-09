@@ -14,9 +14,9 @@ local MyHandlers = AIO.AddHandlers("Kaev", {})
 -- Attribute window
 local frameAttributes = CreateFrame("Frame", "frameAttributes", UIParent)
 frameAttributes:SetSize(200, 150)
-frameAttributes:SetMovable(true)
+frameAttributes:SetMovable(false)
 frameAttributes:EnableMouse(true)
-frameAttributes:RegisterForDrag("LeftButton")
+--frameAttributes:RegisterForDrag("LeftButton")
 frameAttributes:SetPoint("CENTER")
 frameAttributes:SetBackdrop(
 {
@@ -32,10 +32,10 @@ frameAttributes:SetScript("OnDragStop", frameAttributes.StopMovingOrSizing)
 frameAttributes:Hide()
 
 -- Close button
-local buttonAttributesClose = CreateFrame("Button", "buttonAttributesClose", frameAttributes, "UIPanelCloseButton")
+--[[local buttonAttributesClose = CreateFrame("Button", "buttonAttributesClose", frameAttributes, "UIPanelCloseButton")
 buttonAttributesClose:SetPoint("TOPRIGHT", -5, -5)
 buttonAttributesClose:EnableMouse(true)
-buttonAttributesClose:SetSize(27, 27)
+buttonAttributesClose:SetSize(27, 27)]]
 
 -- Title bar
 local frameAttributesTitleBar = CreateFrame("Frame", "frameAttributesTitleBar", frameAttributes, nil)
