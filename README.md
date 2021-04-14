@@ -32,11 +32,24 @@ This is a modified version of Trinitycore + Eluna, its using code and modules fr
 * Support for Death Knight spells maybe.
 
 ### Unfinished/Busted:
-* Currently the core and DB has the naga race enabled which may cause issues with unmodified clients. Am planning to clean up at a later date.
-* RandomSpell currently has no filters aside from level requirements, so a player could learn maul (bearform skill) without having the form spell learnt, essentially gaining an unusable spell.
+* Currently the core and DB has the naga race enabled which may cause issues with unmodified clients. Am planning to clean up at a later date. DONE.
+* RandomSpell currently has no filters aside from level requirements, so a player could learn maul (bearform skill) without having the form spell learnt, essentially gaining an unusable spell. Partially DONE.
 * MOST class specific quests/vendors are still locked to those classes.
 * ALL class locked items are still locked to those classes.
 
+## DWrath Requirements
+You will need the world server available in releases.
+
+You may need to manually add the sql files found in "sql/custom/characters" to your character database.
+
+A patched WoW.exe, https://www.ownedcore.com/forums/world-of-warcraft/world-of-warcraft-bots-programs/501200-repost-sig-md5-protection-remover.html
+* Enables modified clientside Lua/XML which is necessary for changes of the classless system.
+
+This ZIP contains the needed client MPQ file and server DBC files: https://www.xup.in/dl,11464063/DWrathFiles.zip/
+* The MPQ contains Lua, XML and DBCs that are necessary for the client to behave correctly.
+* It also has AIO for Eluna pre-included.
+
+Once compiled you need to move lua_scripts to the root of your compiled server.
 
 ## Introduction
 

@@ -107,7 +107,7 @@ function RollSpell(player, torollspells)
     local roll = torollspells[math.random(#torollspells)]
     AIO.Handle(player, "RandomSpell", "LoadMsg", roll)
     AIO.Handle(player, "RandomSpell", "ShowFrame")
-    -- DB QUERY JUNK
+    -- DB QUERY JUNK------------------
     local pguid =player:GetGUIDLow()
     local qspells = CharDBQuery("SELECT spells FROM character_classless WHERE guid = " .. tostring(pguid))
     local qspellstr = qspells:GetString(0)
@@ -116,6 +116,7 @@ function RollSpell(player, torollspells)
     knownspells[lastspell] = roll
     stringspell = toString(knownspells)
     CharDBQuery("UPDATE character_classless SET spells ='" .. stringspell .. "' WHERE guid = " .. tostring(pguid))
+    ----------------------------------
     player:LearnSpell(roll)
     player:SaveToDB()
     roll = nil

@@ -58,6 +58,8 @@ local function SendVars(msg, player, resend)
     AIO.Handle(player, handlerName, "LoadVars", sendspells, sendtpells, sendtalents, sendstats, sendreset, prices, serverSecret, resend)
 end
 
+
+
 AIO.AddOnInit(SendVars)
 
 --Database Functions
@@ -110,6 +112,7 @@ end
 
 local function OnLearn(event, player)
     local guid = player:GetGUIDLow()
+    local sp, tsp, tal, sta, reset = "", "", "", "0,0,0,0,0", 0
     local querry = CharDBQuery("SELECT * FROM character_classless WHERE guid = " .. guid)
     if querry == nil then
         DBCreate(guid)
@@ -121,7 +124,8 @@ local function OnLearn(event, player)
     talents[guid] = toTable(tal)
     stats[guid] = toTable(sta)
     resets[guid] = reset
-    SendVars(AIO.Msg(), player, false)
+    player:SaveToDB()
+    SendVars(AIO.Msg(), player, true) -- Having resend true fixes overlapping text when a spell is learnt from a roll.
 end
 
 local function OnLogout(event, player)
@@ -166,7 +170,7 @@ function MyHandlers.LearnSpell(player, spr, tpr, clientSecret)
 	        if (spell == 1579) then -- If Tame Beast container spell unlearn what it taught
 		        player:RemoveSpell(1515)
 		        player:RemoveSpell(883)
-		        player:CastSpell(player, 2641, true)
+		        player:CastSpell(player, 2641, true) -- Dismisses pet before unlearning the spell.
 		        player:RemoveSpell(2641)
 	        end
             player:RemoveSpell(spell)

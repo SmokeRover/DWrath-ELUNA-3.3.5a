@@ -1,0 +1,8 @@
+CREATE TABLE IF NOT EXISTS `custom_stats` (
+	`guid` INT(11) NULL DEFAULT NULL,
+	`strength` INT(11) NULL DEFAULT NULL,
+	`agility` INT(11) NULL DEFAULT NULL,
+	`stamina` INT(11) NULL DEFAULT NULL,
+	`intellect` INT(11) NULL DEFAULT NULL,
+	`spirit` INT(11) NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

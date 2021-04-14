@@ -1570,8 +1570,8 @@ local function DoShit()
 
 
 
-    --ClassLess Bars
-    --[[local frame = CLBarsFrame or CreateFrame("Frame", "CLBarsFrame", UIParent)
+    --ClassLess Bars-- Need to add Regular energy alongside rage
+    local frame = CLBarsFrame or CreateFrame("Frame", "CLBarsFrame", UIParent)
     frame:SetMovable(true)
     frame:EnableMouse(true)
     frame:SetToplevel(true)
@@ -1639,12 +1639,11 @@ local function DoShit()
                 bar.value:SetText(pw .. "/" .. pwm)
             end
         )
-    end]]
+    end
 end --End of Doshit
 
 --Main Execution
 local MyHandlers = AIO.AddHandlers(handlerName, {})
-
 
 function MyHandlers.LoadVars(player, spr, tpr, tar,rem, rst, prc, scr, rsd)
     --Init
