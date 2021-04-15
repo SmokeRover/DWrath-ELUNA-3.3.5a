@@ -46,6 +46,7 @@ A patched WoW.exe, https://www.ownedcore.com/forums/world-of-warcraft/world-of-w
 * Enables modified clientside Lua/XML which is necessary for changes of the classless system.
 
 This ZIP contains the needed client MPQ file and server DBC files: https://www.xup.in/dl,11464063/DWrathFiles.zip/
+* Currently only supports English clients, enUS specifically. You can make it work on your client by changing the MPQ filename to patch-LOCALE-g.mpq . However spell names will be blank. Alternatively you can import your locale strings into Spell.dbc .
 * The MPQ contains Lua, XML and DBCs that are necessary for the client to behave correctly.
 * It also has AIO for Eluna pre-included.
 
